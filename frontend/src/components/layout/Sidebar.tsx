@@ -14,7 +14,7 @@ import clsx from 'clsx'
 import { useAuthStore } from '@/store/authStore'
 
 const navigation = [
-  { name: 'Dashboard', href: '/', icon: HomeIcon },
+  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
   { name: 'Inventory', href: '/inventory', icon: CubeIcon },
   { name: 'Inbound', href: '/inbound', icon: ArrowDownTrayIcon },
   { name: 'Outbound', href: '/outbound', icon: ArrowUpTrayIcon },

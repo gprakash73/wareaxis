@@ -9,7 +9,7 @@ import {
 import { useQuery } from '@tanstack/react-query'
 
 import { MainLayout } from '@/components/layout'
-import { LoginPage, RegisterPage, DashboardPage } from '@/pages'
+import { LandingPage, LoginPage, RegisterPage, DashboardPage } from '@/pages'
 import { authApi } from '@/api/auth'
 import { useAuthStore } from '@/store/authStore'
 
@@ -52,7 +52,7 @@ function PublicRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuthStore()
 
   if (isAuthenticated) {
-    return <Navigate to="/" replace />
+    return <Navigate to="/dashboard" replace />
   }
 
   return <>{children}</>
@@ -74,6 +74,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Landing page - public */}
+        <Route path="/" element={<LandingPage />} />
+
         {/* Public routes */}
         <Route
           path="/login"
@@ -100,7 +103,7 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route path="/" element={<DashboardPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/inventory" element={<PlaceholderPage title="Inventory" />} />
           <Route path="/inbound" element={<PlaceholderPage title="Inbound" />} />
           <Route path="/outbound" element={<PlaceholderPage title="Outbound" />} />
@@ -114,8 +117,8 @@ function App() {
           <Route path="/admin/settings" element={<PlaceholderPage title="System Settings" />} />
         </Route>
 
-        {/* Catch all */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {/* Catch all - redirect to dashboard if authenticated, otherwise landing */}
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </BrowserRouter>
   )
