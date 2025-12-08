@@ -62,7 +62,7 @@ export const useAuthStore = create<AuthState>()(
         return user.roles.some((r) => r.code === role)
       },
 
-      hasPermission: (permission) => {
+      hasPermission: (_permission) => {
         const { user } = get()
         if (!user) return false
         // Admin has all permissions
